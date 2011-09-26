@@ -4,6 +4,7 @@ The Prolog GraphPlan Project
 The [Graphplan algorithm](http://en.wikipedia.org/wiki/Graphplan) is an [automatic planning](http://en.wikipedia.org/wiki/Automated_planning) algorithm that can compute, given a set of rules, a plan of action to go from an initial state to a final state.
 
 The algorithm was described by Blum and Furst in 1997 and published in:
+
 > A. Blum and M. Furst (1997). Fast planning through planning graph analysis. Artificial intelligence. 90:281-300.
 
 This project provides an open source (GPL v3) implementation of this planner in Prolog.
