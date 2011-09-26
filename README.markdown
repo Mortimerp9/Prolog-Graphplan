@@ -69,20 +69,22 @@ Actions are defined with three predicates:
 
 And that's it. It seems complicated, but you can see the definition of the actions in the rocket example and you will see it's not that hard. For instance:
 
-    %unload(Rocket, Place, Cargo). -- unloads a cargo from a rocket
-	%preconditions: the cargo must be in the right place
+`unload(Rocket, Place, Cargo).` unload a cargo from a rocket:
+
+1. **preconditions:** the cargo must be in the right place
+
     can(unload(Rocket, Place, Cargo),[at(Rocket,Place),in(Cargo,Rocket)], rocket) :-
     	rocket(Rocket),
     	cargo(Cargo),
     	place(Place).
 
-    %added state: the cargo is now in the new place
+2. **added state:** the cargo is now in the new place
     adds(unload(Rocket, Place, Cargo),[at(Cargo,Place)], _, rocket) :-
     	rocket(Rocket),
     	cargo(Cargo),
     	place(Place).
 
-    %removed state: the cargo is not in the rocket anymore
+3. **removed state:** the cargo is not in the rocket anymore
     deletes(unload(Rocket, _Place, Cargo),[in(Cargo,Rocket)], rocket) :-
     	rocket(Rocket),
     	cargo(Cargo).
@@ -114,7 +116,7 @@ Contributors
 
 This implementation is based on the original algorithm described by **Blum and Furst**.
 
-The initial implementation was provided by **Dr. Suresh Manandhar** from the University of York Computer Science department and slightly modified by **Dr. Pierre Andrews**.
+The initial implementation was provided by [**Dr. Suresh Manandhar**](http://www-users.cs.york.ac.uk/~suresh/) from the University of York Computer Science department and slightly modified by [**Dr. Pierre Andrews**](http://disi.unitn.it/~andrews/).
 
 The code is distributed under GPL v3. If you use it, please be sure to provide the right attribution and, if you wish, let us know about it.
 
@@ -126,6 +128,7 @@ Applications
 ============
 
 Currently, this implementation of the graphplan has successfully been used for:
+
 * Planning Human-Compute Dialogue by P. Andrews.
 
 *if you use this planner for any other application, please let us know.*
