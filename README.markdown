@@ -44,15 +44,16 @@ And "returns" the plan in `P`.
 The plan tries to find a set of actions to change the initial state to reach the final state. Thus you have to define these actions before you can find a plan.
 
 Actions are defined with three predicates:
+
 1. the *preconditions* required to perform an action:
-` can(Action, StateDefinition, Domain).`
+`can(Action, StateDefinition, Domain).`
 
 	* first you define the action name,
 	* second you define the required precondition as a set of state predicates,
 	* and you provide a domain (more about that later).
 
 2. what the action *adds* to the current state of the world when it's completed:
-`adds(Action, ListOfAddedStatePredicates, _, Domain)`
+`adds(Action, ListOfAddedStatePredicates, _, Domain).`
 
     * first you define the action name,
 	* second you define the list of added state predicates,
@@ -60,7 +61,7 @@ Actions are defined with three predicates:
 	* and you provide a domain.
 
 3. what the action *removes* from the current state of the world when it's completed:
-`deletes(Action, ListOfDeletedStatePredicates, Domain)`
+`deletes(Action, ListOfDeletedStatePredicates, Domain).`
 
     * first you define the action name,
 	* second you define the list of removed state predicates,
