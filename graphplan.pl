@@ -13,8 +13,10 @@
 %    You should have received a copy of the GNU General Public License
 %    along with the Prolog Graplan project.  If not, see <http://www.gnu.org/licenses/>.
 
+% (C) 2011 Suresh Manandhar, Pierre Andrews
+
 % Graphplan Planner based on Blum & Furst 1997. Journal of AI, 90:281-300.
-%  Pierre Andrews and Suresh Manandhar Nov 2006 
+%  Pierre Andrews and Suresh Manandhar Nov 2006
 %
 
 :- dynamic no_op_count/1.
