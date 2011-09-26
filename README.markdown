@@ -68,6 +68,7 @@ Actions are defined with three predicates:
 	* and you provide a domain.
 
 And that's it. It seems complicated, but you can see the definition of the actions in the rocket example and you will see it's not that hard. For instance:
+
     %unload(Rocket, Place, Cargo). -- unloads a cargo from a rocket
 	%preconditions: the cargo must be in the right place
     can(unload(Rocket, Place, Cargo),[at(Rocket,Place),in(Cargo,Rocket)], rocket) :-
