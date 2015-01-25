@@ -16,8 +16,16 @@ This implementation has been tested with [SWI-Prolog](http://www.swi-prolog.org/
 
 There is a basic toy example of a planning domain in **examples/rocket_graph.pl**. This example provides the "rocket payload" scenario where a set or rockets can be used to move cargo between places.
 
+Before all, you need to load the planner and the domain:
+
+```prolog
+load_files('graphplan').
+load_files('examples/rocket_graph').
+``` 
+
 First of all we define the "world" facts that can be used by the planner to do the inferences:
 
+```prolog
     rocket(rocket1).
     place(london).
     place(paris).
@@ -25,15 +33,18 @@ First of all we define the "world" facts that can be used by the planner to do t
     cargo(b).
     cargo(c).
     cargo(d).
+ ```
 
 The example predicates are very simple atomic predicates, but with our implementation, you can use any kind of prolog predicates and perfom inferences in the word definition predicates.
 
-*Note that these "word" predicates do not describe a changeable state but fixed facts that will not be changed during the planning (i.e. in our examples, the initial position of the rocket is not defined with such predicates)*
+> *Note that these "word" predicates do not describe a changeable state but fixed facts that will not be changed during the planning (i.e. in our examples, the initial position of the rocket is not defined with such predicates)*
 
 The planner can be called with the `plan\4` predicate, for instance:
+```prolog
     plan([at(a, london), at(rocket1, london), has_fuel(rocket1)],
     	     [at(a, paris)], rocket,
     	     P).
+```
 
 This predicate takes three arguments:
 1. the initial state of the world
@@ -74,24 +85,34 @@ And that's it. It seems complicated, but you can see the definition of the actio
 
 1. **preconditions:** the cargo must be in the right place
 
+```prolog
     can(unload(Rocket, Place, Cargo),[at(Rocket,Place),in(Cargo,Rocket)], rocket) :-
     	rocket(Rocket),
     	cargo(Cargo),
     	place(Place).
+```
 
 2. **added state:** the cargo is now in the new place
+
+```prolog
     adds(unload(Rocket, Place, Cargo),[at(Cargo,Place)], _, rocket) :-
     	rocket(Rocket),
     	cargo(Cargo),
     	place(Place).
+```
 
 3. **removed state:** the cargo is not in the rocket anymore
+
+
+```prolog
     deletes(unload(Rocket, _Place, Cargo),[in(Cargo,Rocket)], rocket) :-
     	rocket(Rocket),
     	cargo(Cargo).
+```
 
 When you call the plan predicate, you will get the complete plan (if one is possible). The current implementation also prints out the plan for simple viewing.
 
+```prolog
     Step 1:
             load(rocket1,london,a)
     
@@ -103,8 +124,9 @@ When you call the plan predicate, you will get the complete plan (if one is poss
     
     
     P = [[load(rocket1, london, a)], [move(rocket1, london, paris)], [unload(rocket1, paris, a)]] .
+``` 
 
-*Note that the graphplan algorithm can find actions that can be performed in parallel and thus you can have more than one action per step. Try the `test2(P)` and `test3(P)` predicates from the example to see how it works.*
+> *Note that the graphplan algorithm can find actions that can be performed in parallel and thus you can have more than one action per step. Try the `test2(P)` and `test3(P)` predicates from the example to see how it works.*
 
 
 The Domain
@@ -130,6 +152,6 @@ Applications
 
 Currently, this implementation of the graphplan has successfully been used for:
 
-* Planning Human-Compute Dialogue by P. Andrews.
+* Planning Human-Computer Dialogue by P. Andrews.
 
 *if you use this planner for any other application, please let us know.*
